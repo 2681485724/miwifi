@@ -8,10 +8,8 @@ import sys
 import re
 import os
 
-#CMCC-NHDz    NHDznFk3
-#CU_3CTa      hae6xyky
-#CMCC-JcGG    fk545g7j
-wifiinfodict = {'CMCC-NHDz': 'NHDznFk3', 'CU_3CTa': 'hae6xyky', 'CMCC-JcGG': 'fk545g7j'}
+
+wifiinfodict = {}
 
 host = '192.168.1.16'
 
@@ -33,7 +31,6 @@ def get_token(host):
         'dnt': '1',
         'sec-gpc': '1'
     }
-    #     'Cookie': '__guid=248908231.4210423834934977500.1671586157030.0227; psp=admin|||2|||0; monitor_count=1',
 
 
     import time
@@ -48,7 +45,7 @@ def get_token(host):
     nonce = "0_" + mac + "_" + str(int(time.time())) + "_" + str(random.randint(1000, 10000))
 
     import hashlib
-    xmpwd = '2681485724'
+    xmpwd = '123456'
     sha1 = hashlib.sha1()
     sha1.update(str(xmpwd + xmkey).encode(encoding='UTF-8'))
     sha1 = sha1.hexdigest()
@@ -164,21 +161,8 @@ def reboot(host, token):
     print(response.text)
 
 
-'''
-from subprocess import PIPE, Popen
-proc = Popen(
-    'ping 8.8.8.89',  # cmd特定的查询空间的命令
-    stdin=None,  # 标准输入 键盘
-    stdout=PIPE,  # -1 标准输出（演示器、终端) 保存到管道中以便进行操作
-    stderr=PIPE,  # 标准错误，保存到管道
-    shell=True)
-#print(proc.communicate()) # 标准输出的字符串+标准错误的字符串
-outinfo, errinfo = proc.communicate()
-print(outinfo.decode('gbk'))  # 外部程序(windows系统)决定编码格式
-print(errinfo.decode('gbk'))
-'''
 
-conf = open(r'C:\Users\Administrator\Desktop\重要文件夹\编程\VS Code\Python\小米路由器\miwifi.conf', mode='r')
+conf = open(r'miwifi.conf', mode='r')
 host = str(conf.readline())[5:]
 host = host.rstrip('\n')
 print(host)
